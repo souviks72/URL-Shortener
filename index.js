@@ -7,7 +7,9 @@ const cors = require('cors');
 
 const db = require('./models/index');
 const errorHandler = require('./handlers/error');
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/auth');
+const urlRoutes = require('./routes/url');
+const {loginRequired,ensureCorrectUser} = require('./middleware/auth');
 
 const port = process.env.PORT || 3000;
 
@@ -15,6 +17,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api/auth',userRoutes);
+app.use('/api/:id/url',loginRequired,ensureCorrectUser, urlRoutes);
 
 app.use((req,res,next)=>{
     return next({

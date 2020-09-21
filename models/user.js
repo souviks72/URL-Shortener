@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const Url = require('./url');
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -12,7 +13,23 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 6,
         maxlength: 32
-    }
+    },
+    fname: {
+        type: String,
+        required: true
+    },
+    lname: {
+        type: String,
+        required: true
+    },
+    activated: {
+        type: Boolean,
+        default: false
+    },
+    urls: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Url"
+    }]
 });
 
 userSchema.pre('save', async function(next){
@@ -25,7 +42,23 @@ userSchema.pre('save', async function(next){
         return next();
     }catch(err){
         console.log("error hashing password");
-        return next(err);
+        return next({
+            status: 500,
+            message: "Error hashing user's password"
+        });
+    }
+});
+
+userSchema.pre('remove', async function(next){
+    try{
+        this.urls.forEach(async url=>{
+            await Message.findByIdAndDelete(url);
+        })
+    }catch(err){
+        return next({
+            status: 500,
+            message: "Error removing deleted user's urls"
+        });
     }
 });
 

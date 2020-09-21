@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "8288c025-ec5d-437b-9499-d727bfc1b0f5",
+		"name": "URL Shortener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"svkmndls@gmail.com\",\r\n    \"password\": \"test123\",\r\n    \"fname\": \"Souvik\",\r\n    \"lname\": \"M\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/auth/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				},
+				"description": "Sign Up an user with\r\n{\r\n    \"email\":\"xyz@gmail.com\",\r\n    \"password\": \"****\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Sign In",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"svkmndls@gmail.com\",\r\n    \"password\": \"test122\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/auth/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				},
+				"description": "Sign In User with email and password"
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password Send Mail",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"svkmndls@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/auth/reset-password",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"reset-password"
+					]
+				},
+				"description": "req.body = {email: \"abc@xyz.com}\r\n\r\nSends a temporary password to your email, if found in db."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Password",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"svkmndls@gmail.com\",\r\n    \"password\": \"44hBDZWID21RPWeODQass6NJpGbwjlG4\",\r\n    \"newPassword\": \"test123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/auth/update-password",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"update-password"
+					]
+				},
+				"description": "Update Password to specified string;\r\nreq.body = {\r\n    email : \"....\",\r\n    password: \".....\",\r\n    newPassword: \".....\"\r\n}\r\n\r\nEnter the password sent in email in the password field for authentication"
+			},
+			"response": []
+		},
+		{
+			"name": "Shorten Url",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNjhjOGE4MmYzMGZiNGZkMDBjMTdkMSIsImFjdGl2YXRlZCI6dHJ1ZSwiaWF0IjoxNjAwNzAyNjY2fQ.WNXmwpz7GfspgBWW1KFMHEtvNLYssofvuHLX3ERWM_o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"longUrl\": \"https://www.youtube.com/watch?v=we1tbF7UJEE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/:id/url/shorten",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						":id",
+						"url",
+						"shorten"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5f68c8a82f30fb4fd00c17d1"
+						}
+					]
+				},
+				"description": "{\r\n    \"longUrl\":\".....\"\r\n}\r\n\r\nShortens this long url"
+			},
+			"response": []
+		},
+		{
+			"name": "Visit website of shortened url",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNjhjOGE4MmYzMGZiNGZkMDBjMTdkMSIsImFjdGl2YXRlZCI6dHJ1ZSwiaWF0IjoxNjAwNzAyNjY2fQ.WNXmwpz7GfspgBWW1KFMHEtvNLYssofvuHLX3ERWM_o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/:id/url/:code",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						":id",
+						"url",
+						":code"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5f68c8a82f30fb4fd00c17d1"
+						},
+						{
+							"key": "code",
+							"value": "wADzRHqTJ"
+						}
+					]
+				},
+				"description": "The parameter code is the code of a shortened url. If a valid one is sent, it will redirect to the actual website."
+			},
+			"response": []
+		},
+		{
+			"name": "Verification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/auth/verify/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"verify",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNjhjOGE4MmYzMGZiNGZkMDBjMTdkMSIsImlhdCI6MTYwMDcwMjYzMn0.fhV_5IrcuTCXj1z-dn7lYPwrSUcDr-bFJrx1SMzjwnk"
+						}
+					]
+				},
+				"description": "Verify Email Upon Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"svkmndls@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/auth/forgot-password",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"forgot-password"
+					]
+				},
+				"description": "{\r\n    \"email\": \"....\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/:id/url",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNjhjOGE4MmYzMGZiNGZkMDBjMTdkMSIsImFjdGl2YXRlZCI6dHJ1ZSwiaWF0IjoxNjAwNzAzMzAwfQ.LFA1yY2jDqfvKHdAnKzWz-DxStTTr_l_BxlxR6uUgBE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/:id/url",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						":id",
+						"url"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5f68c8a82f30fb4fd00c17d1"
+						}
+					]
+				},
+				"description": "Get All Shortened URLs of user"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/auth/:id/update-password",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\":\"test122\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/auth/:id/update-password",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						":id",
+						"update-password"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNjhjOGE4MmYzMGZiNGZkMDBjMTdkMSIsImlhdCI6MTYwMDcxMTEzM30.ir-dSJlAucjDUazuR3pxw_fNhXmbjIR0Ho0d1mT53OI"
+						}
+					]
+				},
+				"description": "used to update password from reset mail. the req.body.password is the new password"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
