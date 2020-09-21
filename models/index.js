@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/reset1',{
+mongoose.connect(process.env.dbURI,{
     useUnifiedTopology: true,
     keepAlive: true,
     useFindAndModify: true
